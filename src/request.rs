@@ -1,11 +1,11 @@
 //! creating and sending HTTP requests
-use std::prelude::v1::*;
 use crate::{
     error,
     response::{Headers, Response, CR_LF_2},
     tls,
     uri::Uri,
 };
+use std::prelude::v1::*;
 use std::{
     fmt,
     io::{self, Read, Write},
@@ -15,7 +15,6 @@ use std::{
 };
 
 const CR_LF: &str = "\r\n";
-const HTTP_V: &str = "HTTP/1.1";
 
 ///Copies data from `reader` to `writer` until the specified `val`ue is reached.
 ///Returns how many bytes has been read.
@@ -72,6 +71,29 @@ impl fmt::Display for Method {
         };
 
         write!(f, "{}", method)
+    }
+}
+
+#[derive(Debug, PartialEq, Clone, Copy)]
+pub enum HttpVersion {
+    Http10,
+    Http11,
+    Http20,
+}
+
+impl HttpVersion {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            HttpVersion::Http10 => "HTTP/1.0",
+            HttpVersion::Http11 => "HTTP/1.1",
+            HttpVersion::Http20 => "HTTP/2.0",
+        }
+    }
+}
+
+impl fmt::Display for HttpVersion {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }
 
@@ -135,9 +157,37 @@ impl<'a> RequestBuilder<'a> {
             headers: Headers::default_http(uri),
             uri,
             method: Method::GET,
-            version: HTTP_V,
+            version: HttpVersion::Http11.as_str(),
             body: None,
         }
+    }
+
+    ///Sets HTTP version
+    ///
+    ///# Examples
+    ///```
+    ///use std::net::TcpStream;
+    ///use http_req::{request::{RequestBuilder, HttpVersion}, tls, uri::Uri};
+    ///
+    ///let addr: Uri = "https://www.rust-lang.org/learn".parse().unwrap();
+    ///let mut writer = Vec::new();
+    ///
+    ///let stream = TcpStream::connect((addr.host().unwrap(), addr.corr_port())).unwrap();
+    ///let mut stream = tls::Config::default()
+    ///    .connect(addr.host().unwrap_or(""), stream)
+    ///    .unwrap();
+    ///
+    ///let response = RequestBuilder::new(&addr)
+    ///    .version(HttpVersion::Http10)
+    ///    .header("Connection", "Close")
+    ///    .send(&mut stream, &mut writer)
+    ///    .unwrap();
+    ///```
+
+    pub fn version(&mut self, version: HttpVersion) -> &mut Self
+    {
+        self.version = version.as_str();
+        self
     }
 
     ///Sets request method

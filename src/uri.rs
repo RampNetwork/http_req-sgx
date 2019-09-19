@@ -84,7 +84,7 @@ impl Uri {
     }
 
     ///Returns information about the user included in this `Uri`.
-    ///     
+    ///
     ///# Example
     ///```
     ///use http_req::uri::Uri;
@@ -100,7 +100,7 @@ impl Uri {
     }
 
     ///Returns host of this `Uri`.
-    ///     
+    ///
     ///# Example
     ///```
     ///use http_req::uri::Uri;
@@ -116,7 +116,7 @@ impl Uri {
     }
 
     ///Returns host of this `Uri` to use in a header.
-    ///     
+    ///
     ///# Example
     ///```
     ///use http_req::uri::Uri;
@@ -135,7 +135,7 @@ impl Uri {
     }
 
     ///Returns port of this `Uri`
-    ///     
+    ///
     ///# Example
     ///```
     ///use http_req::uri::Uri;
@@ -152,7 +152,7 @@ impl Uri {
 
     ///Returns port corresponding to this `Uri`.
     ///Returns default port if it hasn't been set in the uri.
-    ///  
+    ///
     ///# Example
     ///```
     ///use http_req::uri::Uri;
@@ -173,7 +173,7 @@ impl Uri {
     }
 
     ///Returns path of this `Uri`.
-    ///  
+    ///
     ///# Example
     ///```
     ///use http_req::uri::Uri;
@@ -186,7 +186,7 @@ impl Uri {
     }
 
     ///Returns query of this `Uri`.
-    ///  
+    ///
     ///# Example
     ///```
     ///use http_req::uri::Uri;
@@ -199,7 +199,7 @@ impl Uri {
     }
 
     ///Returns fragment of this `Uri`.
-    ///  
+    ///
     ///# Example
     ///```
     ///use http_req::uri::Uri;
@@ -212,7 +212,7 @@ impl Uri {
     }
 
     ///Returns resource `Uri` points to.
-    ///  
+    ///
     ///# Example
     ///```
     ///use http_req::uri::Uri;

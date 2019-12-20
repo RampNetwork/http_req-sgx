@@ -1,4 +1,5 @@
 //! creating and sending HTTP requests
+use std::prelude::v1::*;
 use crate::{
     error,
     response::{Headers, Response, CR_LF_2},

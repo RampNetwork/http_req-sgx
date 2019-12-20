@@ -15,6 +15,6 @@ http_req = { path = "../../.." }
 unicase = { git = "https://github.com/mesalock-linux/unicase-sgx" }
 
 [target.'cfg(not(target_env = "sgx"))'.dependencies]
-sgx_types = { rev = "v1.0.9", git = "https://github.com/baidu/rust-sgx-sdk.git" }
-sgx_tstd = { rev = "v1.0.9", git = "https://github.com/baidu/rust-sgx-sdk.git", features = ["net"] }
-sgx_tunittest = {rev = "v1.0.9", git = "https://github.com/baidu/rust-sgx-sdk.git" }
+sgx_types = { rev = "v1.1.0", git = "https://github.com/apache/teaclave-sgx-sdk.git" }
+sgx_tstd = { rev = "v1.1.0", git = "https://github.com/apache/teaclave-sgx-sdk.git", features = ["net"] }
+sgx_tunittest = {rev = "v1.1.0", git = "https://github.com/apache/teaclave-sgx-sdk.git" }
